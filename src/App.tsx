@@ -7,8 +7,8 @@ function App() {
     const [envelopeOpened, setEnvelopeOpened] = useState(false);
     const [showInvitation, setShowInvitation] = useState(false);
     const [noClickCount, setNoClickCount] = useState(0);
-    const [noClickTotal, setNoClickTotal] = useState(0);
-    const [showPlease, setShowPlease] = useState(false);
+    const [hasInteracted, setHasInteracted] = useState(false);
+    const [showSadMessage, setShowSadMessage] = useState(false);
 
     const messages = [
         "Are you sure?",
@@ -17,24 +17,51 @@ function App() {
         "Last chance!",
         "I'm very sad now :(",
         "You're breaking my heart!",
+        "Pretty please?",
+        "With a cherry on top?",
+        "Don't break my heart...",
+        "One last chance?",
+    ];
+
+    // Tenor embed ids (from links you provided)
+    const tenorIds = [
+        "20739728",
+        "10103206880427503134",
+        "1418144503451126279",
+        "7707780315143387184",
+        "1975526499861417359",
+        "15528176692501895710",
+        "2157306352389636545",
+        "15528176692501895710",
+        "5276199764143986284",
+        "214438556722653764",
+        "4231717927828306245",
+        "2049020038486032791",
+        "17429986855464100052",
     ];
 
     const handleNoHover = (e: React.MouseEvent<HTMLButtonElement>) => {
-        const randomX = (Math.random() - 0.5) * 300;
-        const randomY = (Math.random() - 0.5) * 200;
-        setNoPosition({x: randomX, y: randomY});
+        // intentionally empty: movement should only occur on click
     };
 
     const handleNoClick = () => {
-        setNoClickCount((prev) => (prev + 1) % messages.length);
-        setNoClickTotal((prev) => {
-            const t = prev + 1;
-            if (t >= messages.length) setShowPlease(true);
-            return t;
-        });
-        const randomX = (Math.random() - 0.5) * 400;
-        const randomY = (Math.random() - 0.5) * 300;
-        setNoPosition({x: randomX, y: randomY});
+        const vw = window.innerWidth || 0;
+        const isSmall = vw <= 420; // match CSS breakpoint
+
+        if (!isSmall) {
+            if (!hasInteracted) setHasInteracted(true);
+            // randomize position on click for larger screens
+            const maxX = window.innerWidth - 150;
+            const maxY = window.innerHeight - 60;
+            const randomX = Math.random() * maxX;
+            const randomY = Math.random() * maxY;
+            setNoPosition({x: randomX, y: randomY});
+        }
+
+        // Show sad message permanently and advance to next message in list
+        setShowSadMessage(true);
+        const next = (noClickCount + 1) % messages.length;
+        setNoClickCount(next);
     };
 
     const handleYes = () => {
@@ -113,6 +140,20 @@ function App() {
                 </div>
 
                 <h1 className="title">So... 💭</h1>
+                {showSadMessage && (
+                    <div className="sad-message">
+                        <div className="sad-gif">
+                            <iframe
+                                src={`https://tenor.com/embed/${tenorIds[noClickCount % tenorIds.length]}`}
+                                title="sad-gif"
+                                frameBorder="0"
+                                scrolling="no"
+                                allowTransparency={true}
+                            />
+                        </div>
+                        <p className="sad-text">{messages[noClickCount]}</p>
+                    </div>
+                )}
                 <p className="subtitle">
                     I don’t know if you already have plans for Valentine’s Day,
                     but I’d really love to take you out—if you’d let me.
@@ -130,14 +171,19 @@ function App() {
                         Yes! 😍
                     </button>
                     <button
-                        className="btn btn-no"
+                        className={`btn btn-no ${hasInteracted ? "floating" : ""}`}
                         onMouseEnter={handleNoHover}
                         onClick={handleNoClick}
-                        style={{
-                            transform: `translate(${noPosition.x}px, ${noPosition.y}px)`,
-                        }}
+                        style={
+                            hasInteracted
+                                ? {
+                                      left: `${noPosition.x}px`,
+                                      top: `${noPosition.y}px`,
+                                  }
+                                : {}
+                        }
                     >
-                        {showPlease ? "Please?" : messages[noClickCount]}
+                        No 🥺
                     </button>
                 </div>
             </div>
