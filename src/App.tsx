@@ -9,6 +9,9 @@ function App() {
     const [noClickCount, setNoClickCount] = useState(0);
     const [hasInteracted, setHasInteracted] = useState(false);
     const [showSadMessage, setShowSadMessage] = useState(false);
+    const [showDateModal, setShowDateModal] = useState(false);
+    const [selectedDate, setSelectedDate] = useState("");
+    const [userMessage, setUserMessage] = useState("");
 
     const messages = [
         "Friendly Date?",
@@ -104,12 +107,85 @@ function App() {
                     </p>
                     <p className="heart-sequence">❤️ 💕 💖 💝 💗 ❤️</p>
                     <p className="date-message">
-                        I can't wait to spend an amazing day with you! Pick a
-                        date and let's make it unforgettable! 🌹 NOTE: Dapat
-                        weekends para maaga tayo makaalis at hindi gabihin
-                        masyado. Para hindi magalit parents mo.
+                        I can't wait to spend an{" "}
+                        <span className="highlight">amazing day</span> with you!
+                        <br />
+                        Let's pick a date and make it{" "}
+                        <span className="highlight">unforgettable</span>! 🌹
                     </p>
-                    <div className="emoji-party">🥂 ✨ 🌹 🎊 💫 🎈 💝 🎆</div>
+                    <div className="note-section">
+                        <p className="note-label">✨ A little reminder:</p>
+                        <p className="note-text">
+                            Weekends are best so we can take our time. Let's
+                            make sure your parents are happy too! 💕
+                        </p>
+                    </div>
+                    <button
+                        className="date-picker-btn"
+                        onClick={() => setShowDateModal(true)}
+                    >
+                        📅 Pick a Date
+                    </button>
+                    {showDateModal && (
+                        <div
+                            className="modal-overlay"
+                            onClick={() => setShowDateModal(false)}
+                        >
+                            <div
+                                className="date-modal"
+                                onClick={(e) => e.stopPropagation()}
+                            >
+                                <h2 className="modal-title">
+                                    Choose a Date 💕
+                                </h2>
+                                <input
+                                    type="date"
+                                    value={selectedDate}
+                                    onChange={(e) =>
+                                        setSelectedDate(e.target.value)
+                                    }
+                                    className="date-input"
+                                    min={new Date().toISOString().split("T")[0]}
+                                />
+
+                                {/* --- New Message Field --- */}
+                                <textarea
+                                    placeholder="Leave a note... (suggest a place or a favorite snack!) ✍️"
+                                    value={userMessage}
+                                    onChange={(
+                                        e: React.ChangeEvent<HTMLTextAreaElement>,
+                                    ) => setUserMessage(e.target.value)}
+                                    className="message-input"
+                                    rows={3}
+                                />
+                                <div className="modal-buttons">
+                                    <button
+                                        type="button"
+                                        className="modal-btn cancel-btn"
+                                        onClick={() => setShowDateModal(false)}
+                                    >
+                                        Cancel
+                                    </button>
+                                    <button
+                                        type="button"
+                                        className="modal-btn confirm-btn"
+                                        disabled={!selectedDate}
+                                        onClick={() => {
+                                            // Log or handle the data
+                                            console.log({
+                                                date: selectedDate,
+                                                message: userMessage,
+                                            });
+                                            setShowDateModal(false);
+                                            setYesClicked(true); // Or your final success logic
+                                        }}
+                                    >
+                                        Confirm Date
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
                     <p className="love-message">
                         This is just the beginning of something beautiful... 💕
                     </p>

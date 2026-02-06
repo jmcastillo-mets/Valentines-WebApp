@@ -284,14 +284,286 @@ body {
     .hearts-bg { display: none; }
 }
 
-@media (max-height: 600px) {
-    .content { padding: 30px 20px; }
+/* Extra small phones (320px - 374px) */
+@media (max-width: 374px) {
+    .success-content {
+        padding: clamp(24px, 4vh, 36px) clamp(16px, 4vw, 24px);
+        border-radius: clamp(16px, 3vw, 24px);
+    }
+
+    .confetti {
+        font-size: 1.2rem;
+        opacity: 0.6;
+    }
+
+    .success-title {
+        margin-bottom: 12px;
+    }
+}
+
+/* Small phones (375px - 480px) */
+@media (min-width: 375px) and (max-width: 480px) {
+    .success-content {
+        padding: clamp(32px, 4vh, 48px) clamp(20px, 4.5vw, 32px);
+    }
+
+    .success-title {
+        margin-bottom: 14px;
+    }
+}
+
+/* Tablets portrait (481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+    .success-content {
+        padding: clamp(40px, 5vh, 56px) clamp(28px, 5vw, 40px);
+        border-radius: clamp(22px, 4vw, 28px);
+    }
+
+    .success-title {
+        margin-bottom: 18px;
+    }
+}
+
+/* Tablets landscape (769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .success-content {
+        padding: clamp(44px, 5vh, 60px) clamp(32px, 5vw, 44px);
+    }
+}
+
+/* Desktops (1025px and above) */
+@media (min-width: 1025px) {
+    .success-content {
+        padding: 60px 48px;
+    }
+}
+
+/* Tablet and medium screens */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .confetti {
+        font-size: 2rem;
+    }
+
+    .success-title {
+        animation-duration: 0.65s;
+    }
+}
+
+/* Large desktops */
+@media (min-width: 1200px) {
+    .confetti {
+        font-size: 2.3rem;
+        opacity: 0.8;
+    }
+
+    .success-title {
+        animation-duration: 0.6s;
+    }
+
+    .success-subtitle {
+        animation-duration: 2.5s;
+    }
+}
+
+/* Very short viewports (height < 500px) */
+@media (max-height: 499px) {
+    .container.success {
+        padding: clamp(8px, 2vw, 16px);
+    }
+
+    .success-content {
+        padding: clamp(18px, 3vh, 28px) clamp(16px, 4vw, 28px);
+        border-radius: clamp(14px, 3vw, 20px);
+        max-height: 90dvh;
+    }
+
+    .confetti {
+        font-size: 1.3rem;
+        opacity: 0.4;
+    }
+
+    .success-title {
+        font-size: clamp(2rem, 6vw, 3rem);
+        margin-bottom: 6px;
+    }
+
+    .success-subtitle {
+        font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+        margin: 6px 0 10px 0;
+    }
+
+    .success-content p {
+        font-size: clamp(0.85rem, 2vw, 1rem);
+        margin: 4px 0;
+    }
+
+    .heart-sequence {
+        font-size: clamp(1.6rem, 3.5vw, 2rem);
+        margin: 6px 0;
+    }
+
+    .emoji-party {
+        font-size: clamp(1.6rem, 3vw, 2rem);
+        margin: 6px 0;
+    }
+
+    .note-section {
+        padding: clamp(8px, 1.5vh, 12px) clamp(8px, 2vw, 16px);
+        margin: 8px 0;
+    }
+
+    .love-message {
+        margin-top: 6px;
+        font-size: clamp(0.8rem, 1.8vw, 0.95rem);
+    }
+}
+
+/* Medium height viewports (500px - 600px) */
+@media (min-height: 500px) and (max-height: 600px) {
+    .success-content {
+        padding: clamp(32px, 4vh, 44px) clamp(20px, 4vw, 36px);
+    }
+
+    .success-title {
+        margin-bottom: 12px;
+    }
+
+    .success-content p {
+        margin: 8px 0;
+    }
+}
+
+/* Tall viewports (height > 900px) */
+@media (min-height: 900px) {
+    .success-content {
+        padding: clamp(54px, 6vh, 72px) clamp(36px, 6vw, 56px);
+    }
+
+    .success-title {
+        margin-bottom: 24px;
+    }
+
+    .heart-sequence {
+        margin: 24px 0;
+    }
+
+    .emoji-party {
+        margin: 24px 0;
+    }
+
+    .love-message {
+        margin-top: 32px;
+    }
+}
+
+/* Landscape orientation adjustments */
+@media (max-height: 500px) and (orientation: landscape) {
+    .success-content {
+        padding: clamp(16px, 3vh, 24px) clamp(16px, 4vw, 28px);
+        max-height: 85dvh;
+    }
+
+    .success-title {
+        font-size: clamp(1.8rem, 5vw, 2.8rem);
+        margin-bottom: 8px;
+        animation-duration: 0.5s;
+    }
+
+    .success-subtitle {
+        font-size: clamp(0.9rem, 2vw, 1rem);
+        margin: 4px 0 8px 0;
+    }
+
+    .success-content p {
+        margin: 4px 0;
+    }
+
+    .heart-sequence {
+        margin: 6px 0;
+    }
+
+    .emoji-party {
+        margin: 6px 0;
+    }
+
+    .note-section {
+        margin: 6px 0;
+        padding: clamp(8px, 1.5vh, 12px) clamp(8px, 2vw, 16px);
+    }
+
+    .love-message {
+        margin-top: 6px;
+    }
+
+    .confetti {
+        font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+        opacity: 0.5;
+    }
+}
+
+/* Tall landscape (height > 600px and landscape) */
+@media (min-height: 600px) and (orientation: landscape) {
+    .success-content {
+        padding: clamp(28px, 4vh, 40px) clamp(24px, 5vw, 36px);
+    }
+}
+
+/* Date Modal Responsive Styles */
+@media (max-width: 480px) {
+    .modal-overlay {
+        padding: 16px;
+    }
+
+    .date-modal {
+        padding: clamp(20px, 4vw, 28px);
+    }
+
+    .modal-title {
+        font-size: clamp(1.2rem, 4.5vw, 1.6rem);
+        margin-bottom: clamp(16px, 3vw, 24px);
+    }
+
+    .date-input {
+        padding: clamp(10px, 1.5vw, 14px);
+        margin-bottom: clamp(16px, 2.5vw, 24px);
+    }
+
+    .modal-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .modal-btn {
+        min-width: 100%;
+        padding: clamp(11px, 2vw, 14px) clamp(16px, 3vw, 24px);
+    }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+    .modal-overlay {
+        padding: 20px;
+    }
+
+    .date-modal {
+        max-width: 400px;
+    }
+}
+
+@media (min-height: 900px) {
+    .date-picker-btn {
+        margin: clamp(20px, 3vw, 36px) 0;
+    }
 }
 
 .container.success {
-    background: linear-gradient(135deg, #f5576c 0%, #f093fb 50%, #764ba2 100%);
+    background: linear-gradient(90deg, hsla(358, 26%, 79%, 1) 0%, hsla(273, 60%, 73%, 1) 50%, hsla(356, 53%, 57%, 1) 100%);
     position: relative;
     overflow: hidden;
+    padding: clamp(12px, 3vw, 24px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100dvh;
 }
 
 .confetti-container {
@@ -306,9 +578,10 @@ body {
 
 .confetti {
     position: absolute;
-    font-size: 2rem;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
     animation: confettiFall linear forwards;
-    opacity: 0.8;
+    opacity: 0.75;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
 }
 
 @keyframes confettiFall {
@@ -322,69 +595,291 @@ body {
     position: relative;
     z-index: 10;
     text-align: center;
-    animation: popIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    background: rgba(255, 255, 255, 0.95);
+    padding: clamp(30px, 5vh, 60px) clamp(24px, 5vw, 48px);
+    border-radius: clamp(20px, 4vw, 30px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    max-width: min(620px, 95vw);
+    width: 100%;
+    animation: slideIn 0.6s ease-out;
+    max-height: 95dvh;
+    overflow-y: auto;
 }
 
 .success-title {
-    font-size: 4rem;
-    color: #fff;
-    margin-bottom: 15px;
-    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
-    animation: bounce 0.8s ease-in-out infinite;
+    font-size: clamp(2.2rem, min(8vw, 7vh), 4.5rem);
+    color: #d4306c;
+    margin-bottom: clamp(16px, 2vh, 24px);
+    text-shadow: none;
+    animation: bounce 0.7s ease-in-out infinite;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    line-height: 1.1;
 }
 
 .success-subtitle {
-    font-size: 1.6rem;
-    color: #fff;
-    margin: 15px 0;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-    font-weight: 600;
-    animation: pulse 2s ease-in-out infinite;
+    font-size: clamp(1rem, min(3.5vw, 3vh), 1.6rem);
+    color: #555;
+    margin: clamp(10px, min(2vw, 2vh), 16px) 0 clamp(14px, min(3vw, 2.5vh), 24px) 0;
+    text-shadow: none;
+    font-weight: 700;
+    animation: pulse 2.8s ease-in-out infinite;
+    line-height: 1.5;
+    letter-spacing: 0.3px;
 }
 
 .success-content p {
-    font-size: 1.2rem;
-    color: #fff;
-    margin: 12px 0;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    font-size: clamp(0.9rem, min(2.5vw, 2.2vh), 1.2rem);
+    color: #333;
+    margin: clamp(8px, min(1.5vw, 1.5vh), 16px) 0;
+    text-shadow: none;
+    line-height: 1.6;
+    letter-spacing: 0.2px;
 }
 
 .heart-sequence {
-    font-size: 2.5rem;
-    letter-spacing: 12px;
+    font-size: clamp(1.8rem, min(5vw, 4vh), 2.6rem);
+    letter-spacing: clamp(10px, min(2vw, 1.5vh), 16px);
     animation: heartbeat 1.2s ease-in-out infinite;
+    margin: clamp(12px, min(2vw, 2vh), 20px) 0;
+    color: #d4306c;
 }
 
 .date-message {
-    font-style: italic;
-    font-size: 1.3rem;
+    font-style: normal;
+    font-size: clamp(0.95rem, min(2.2vw, 2vh), 1.25rem);
     font-weight: 500;
+    line-height: 2.5 !important;
+    letter-spacing: 0.3px;
+    color: #333;
 }
 
 .emoji-party {
-    font-size: 2.5rem;
-    letter-spacing: 12px;
+    font-size: clamp(1.7rem, min(4.5vw, 3.5vh), 2.6rem);
+    letter-spacing: clamp(10px, min(2.5vw, 2vh), 16px);
     display: block;
-    animation: spin 4s linear infinite;
+    margin: clamp(12px, min(2vw, 2vh), 20px) 0;
+    color: inherit;
+}
+
+.date-picker-btn {
+    background: linear-gradient(135deg, #d4306c 0%, #f093fb 100%);
+    color: white;
+    border: none;
+    padding: clamp(12px, min(2vw, 1.5vh), 18px) clamp(24px, min(4vw, 3vh), 36px);
+    font-size: clamp(1rem, min(2.5vw, 2vh), 1.3rem);
+    border-radius: clamp(12px, 2vw, 20px);
+    font-weight: 600;
+    cursor: pointer;
+    margin: clamp(16px, min(3vw, 2.5vh), 28px) 0;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(212, 48, 108, 0.3);
+    letter-spacing: 0.5px;
+    animation: slideInUp 0.6s ease-out 0.5s both;
+}
+
+.date-picker-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(212, 48, 108, 0.4);
+}
+
+.date-picker-btn:active {
+    transform: translateY(-1px);
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.date-modal {
+    background: white;
+    border-radius: clamp(20px, 4vw, 30px);
+    padding: clamp(24px, 5vw, 40px);
+    max-width: min(500px, 95vw);
+    width: 100%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: slideInDown 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-title {
+    color: #d4306c;
+    font-size: clamp(1.4rem, min(4vw, 3vh), 1.8rem);
+    margin: 0 0 clamp(18px, 3vw, 28px) 0;
+    text-align: center;
+    font-weight: 700;
+}
+
+.date-input {
+    width: 100%;
+    padding: clamp(12px, 2vw, 16px);
+    font-size: clamp(1rem, 2.2vw, 1.2rem);
+    border: 2px solid #d4306c;
+    border-radius: clamp(10px, 2vw, 15px);
+    box-sizing: border-box;
+    margin-bottom: clamp(20px, 3vw, 28px);
+    color: #333;
+    background: white;
+    transition: border-color 0.3s ease;
+}
+
+.date-input:focus {
+    outline: none;
+    border-color: #f093fb;
+    box-shadow: 0 0 0 3px rgba(240, 147, 251, 0.1);
+}
+
+.modal-buttons {
+    display: flex;
+    gap: clamp(12px, 2vw, 16px);
+    justify-content: center;
+}
+
+.modal-btn {
+    padding: clamp(10px, 1.5vw, 14px) clamp(20px, 4vw, 32px);
+    font-size: clamp(0.95rem, 2vw, 1.1rem);
+    border: none;
+    border-radius: clamp(10px, 2vw, 15px);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 0.3px;
+    min-width: 120px;
+}
+
+.cancel-btn {
+    background: #f0f0f0;
+    color: #666;
+    border: 2px solid #ddd;
+}
+
+.cancel-btn:hover {
+    background: #e8e8e8;
+    border-color: #999;
+}
+
+.confirm-btn {
+    background: linear-gradient(135deg, #d4306c 0%, #f093fb 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(212, 48, 108, 0.3);
+}
+
+.confirm-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(212, 48, 108, 0.4);
+}
+
+.confirm-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 .love-message {
-    margin-top: 25px;
-    font-size: 1.1rem;
+    margin-top: clamp(14px, min(3vw, 2.5vh), 28px);
+    font-size: clamp(0.85rem, min(2vw, 1.8vh), 1.1rem);
     font-style: italic;
+    letter-spacing: 0.4px;
+    animation: fadeInUp 1.2s ease-out 0.3s both;
+    font-weight: 500;
+    color: #666;
+}
+
+.highlight {
+    background: #f0f0f0;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-weight: 600;
     letter-spacing: 0.5px;
-    animation: fadeInUp 1s ease-out 0.3s both;
+    color: #d4306c;
+}
+
+.note-section {
+    background: #f8f0f5;
+    padding: clamp(10px, min(2vw, 1.5vh), 18px) clamp(12px, min(2.5vw, 2vh), 20px);
+    border-radius: clamp(10px, min(2vw, 1.5vh), 16px);
+    border-left: 4px solid #d4306c;
+    margin: clamp(12px, min(3vw, 2.5vh), 24px) 0;
+    animation: slideDown 0.8s ease-out 0.4s both;
+}
+
+.note-label {
+    font-size: clamp(0.8rem, min(2vw, 1.5vh), 1rem);
+    font-weight: 700;
+    margin: 0 0 clamp(4px, min(1vw, 1vh), 10px) 0;
+    opacity: 1;
+    color: #d4306c;
+}
+
+.note-text {
+    font-size: clamp(0.85rem, min(2vw, 1.8vh), 1.1rem);
+    margin: 0;
+    line-height: 1.6;
+    opacity: 1;
+    color: #555;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @keyframes bounce {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
+    50% { transform: translateY(-12px); }
 }
 
 @keyframes heartbeat {
     0%, 100% { transform: scale(1); }
-    25% { transform: scale(1.1); }
-    50% { transform: scale(1); }
+    14% { transform: scale(1.08); }
+    28% { transform: scale(1); }
 }
 
 @keyframes spin {
@@ -395,7 +890,7 @@ body {
 @keyframes fadeInUp {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(15px);
     }
     to {
         opacity: 1;
@@ -607,4 +1102,31 @@ body {
 
 .envelope {
     transform: translateY(-20px);
+}
+
+.message-input {
+    width: 100%;
+    padding: clamp(12px, 2vw, 16px);
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    border: 2px solid #d4306c;
+    border-radius: clamp(10px, 2vw, 15px);
+    box-sizing: border-box;
+    margin-bottom: clamp(20px, 3vw, 28px);
+    color: #333;
+    background: white;
+    font-family: inherit;
+    resize: none; /* Keeps the modal size consistent */
+    transition: all 0.3s ease;
+}
+
+.message-input:focus {
+    outline: none;
+    border-color: #f093fb;
+    box-shadow: 0 0 0 3px rgba(240, 147, 251, 0.1);
+}
+
+/* Ensure the modal has enough room for the extra field */
+.date-modal {
+    max-height: 90vh;
+    overflow-y: auto;
 }
