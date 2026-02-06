@@ -11,16 +11,20 @@ function App() {
     const [showSadMessage, setShowSadMessage] = useState(false);
 
     const messages = [
+        "Friendly Date?",
         "Are you sure?",
         "Really sure?",
         "Think about it...",
         "Last chance!",
         "I'm very sad now :(",
-        "You're breaking my heart!",
-        "Pretty please?",
-        "With a cherry on top?",
-        "Don't break my heart...",
-        "One last chance?",
+        "Please say yes...",
+        "I promise it'll be fun!",
+        "I'll bring flowers 🌹",
+        "Let's go see the beach?",
+        "Road trip? 🚗",
+        "I'll treat you to dinner 🍽️",
+        "We can watch your favorite movie 🎬",
+        "I'll make it a day to remember! 💖",
     ];
 
     // Tenor embed ids (from links you provided)
@@ -39,10 +43,6 @@ function App() {
         "2049020038486032791",
         "17429986855464100052",
     ];
-
-    const handleNoHover = (e: React.MouseEvent<HTMLButtonElement>) => {
-        // intentionally empty: movement should only occur on click
-    };
 
     const handleNoClick = () => {
         const vw = window.innerWidth || 0;
@@ -76,12 +76,43 @@ function App() {
     if (yesClicked) {
         return (
             <div className="container success">
+                {/* Floating confetti background */}
+                <div className="confetti-container">
+                    {[...Array(50)].map((_, i) => (
+                        <div
+                            key={i}
+                            className="confetti"
+                            style={{
+                                left: `${Math.random() * 100}%`,
+                                animationDelay: `${Math.random() * 0.5}s`,
+                                animationDuration: `${2 + Math.random() * 1}s`,
+                            }}
+                        >
+                            {
+                                ["🎉", "💖", "🎊", "✨", "🌹", "💝"][
+                                    Math.floor(Math.random() * 6)
+                                ]
+                            }
+                        </div>
+                    ))}
+                </div>
+
                 <div className="success-content">
-                    <h1>🎉 YES! 🎉</h1>
-                    <p>I knew you were a person of excellent taste!</p>
+                    <h1 className="success-title">🎉 YES! 🎉</h1>
+                    <p className="success-subtitle">
+                        You just made me the happiest person!
+                    </p>
                     <p className="heart-sequence">❤️ 💕 💖 💝 💗 ❤️</p>
-                    <p className="date-message">Can't wait to see you soon!</p>
-                    <p className="emoji-party">🥂✨🌹🎊💫</p>
+                    <p className="date-message">
+                        I can't wait to spend an amazing day with you! Pick a
+                        date and let's make it unforgettable! 🌹 NOTE: Dapat
+                        weekends para maaga tayo makaalis at hindi gabihin
+                        masyado. Para hindi magalit parents mo.
+                    </p>
+                    <div className="emoji-party">🥂 ✨ 🌹 🎊 💫 🎈 💝 🎆</div>
+                    <p className="love-message">
+                        This is just the beginning of something beautiful... 💕
+                    </p>
                 </div>
             </div>
         );
@@ -172,7 +203,6 @@ function App() {
                     </button>
                     <button
                         className={`btn btn-no ${hasInteracted ? "floating" : ""}`}
-                        onMouseEnter={handleNoHover}
                         onClick={handleNoClick}
                         style={
                             hasInteracted

@@ -3,6 +3,7 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+    overflow: hidden;
 }
 
 * {
@@ -28,8 +29,9 @@ body {
 .container {
     position: relative;
     /* Use dynamic viewport units for modern browsers and fall back to vh */
-    min-height: 100dvh;
     width: 100%;
+    height: 100dvh;
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -286,34 +288,119 @@ body {
     .content { padding: 30px 20px; }
 }
 
-.success-content h1 {
-    font-size: 3.5rem;
+.container.success {
+    background: linear-gradient(135deg, #f5576c 0%, #f093fb 50%, #764ba2 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.confetti-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.confetti {
+    position: absolute;
+    font-size: 2rem;
+    animation: confettiFall linear forwards;
+    opacity: 0.8;
+}
+
+@keyframes confettiFall {
+    to {
+        transform: translateY(100dvh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.success-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    animation: popIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.success-title {
+    font-size: 4rem;
     color: #fff;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+    animation: bounce 0.8s ease-in-out infinite;
+}
+
+.success-subtitle {
+    font-size: 1.6rem;
+    color: #fff;
+    margin: 15px 0;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    font-weight: 600;
+    animation: pulse 2s ease-in-out infinite;
 }
 
 .success-content p {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     color: #fff;
-    margin: 15px 0;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    margin: 12px 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .heart-sequence {
-    font-size: 2rem;
-    letter-spacing: 10px;
+    font-size: 2.5rem;
+    letter-spacing: 12px;
+    animation: heartbeat 1.2s ease-in-out infinite;
 }
 
 .date-message {
     font-style: italic;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
+    font-weight: 500;
 }
 
 .emoji-party {
-    font-size: 3rem;
-    letter-spacing: 15px;
-    animation: bounce 0.6s ease-in-out infinite;
+    font-size: 2.5rem;
+    letter-spacing: 12px;
+    display: block;
+    animation: spin 4s linear infinite;
+}
+
+.love-message {
+    margin-top: 25px;
+    font-size: 1.1rem;
+    font-style: italic;
+    letter-spacing: 0.5px;
+    animation: fadeInUp 1s ease-out 0.3s both;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    25% { transform: scale(1.1); }
+    50% { transform: scale(1); }
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @keyframes bounce {
@@ -352,8 +439,10 @@ body {
 /* Envelope intro styles */
 .envelope-wrapper {
     position: relative;
-    /* allow envelope area to fit within viewport accounting for padding */
-    min-height: calc(100dvh - 40px);
+    /* lock to viewport height */
+    width: 100%;
+    height: 100dvh;
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
