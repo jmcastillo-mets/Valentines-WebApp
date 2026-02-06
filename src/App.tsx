@@ -4,7 +4,11 @@ import {useState} from "react";
 function App() {
     const [noPosition, setNoPosition] = useState({x: 0, y: 0});
     const [yesClicked, setYesClicked] = useState(false);
+    const [envelopeOpened, setEnvelopeOpened] = useState(false);
+    const [showInvitation, setShowInvitation] = useState(false);
     const [noClickCount, setNoClickCount] = useState(0);
+    const [noClickTotal, setNoClickTotal] = useState(0);
+    const [showPlease, setShowPlease] = useState(false);
 
     const messages = [
         "Are you sure?",
@@ -23,6 +27,11 @@ function App() {
 
     const handleNoClick = () => {
         setNoClickCount((prev) => (prev + 1) % messages.length);
+        setNoClickTotal((prev) => {
+            const t = prev + 1;
+            if (t >= messages.length) setShowPlease(true);
+            return t;
+        });
         const randomX = (Math.random() - 0.5) * 400;
         const randomY = (Math.random() - 0.5) * 300;
         setNoPosition({x: randomX, y: randomY});
@@ -30,6 +39,11 @@ function App() {
 
     const handleYes = () => {
         setYesClicked(true);
+    };
+
+    const handleEnvelopeClick = () => {
+        setEnvelopeOpened(true);
+        setTimeout(() => setShowInvitation(true), 700);
     };
 
     if (yesClicked) {
@@ -41,6 +55,44 @@ function App() {
                     <p className="heart-sequence">❤️ 💕 💖 💝 💗 ❤️</p>
                     <p className="date-message">Can't wait to see you soon!</p>
                     <p className="emoji-party">🥂✨🌹🎊💫</p>
+                </div>
+            </div>
+        );
+    }
+
+    if (!showInvitation) {
+        return (
+            <div className="container">
+                <div className="envelope-wrapper">
+                    <div
+                        className={`envelope ${envelopeOpened ? "open" : ""}`}
+                        onClick={handleEnvelopeClick}
+                        role="button"
+                        tabIndex={0}
+                        onKeyDown={(e) => {
+                            // allow Enter or Space to open
+                            if (
+                                (e as React.KeyboardEvent<HTMLDivElement>)
+                                    .key === "Enter" ||
+                                (e as React.KeyboardEvent<HTMLDivElement>)
+                                    .key === " "
+                            ) {
+                                handleEnvelopeClick();
+                            }
+                        }}
+                        aria-label="Open invitation"
+                    >
+                        <div className="flap" />
+                        <div
+                            className="seal"
+                            aria-hidden
+                        >
+                            <span>❤</span>
+                        </div>
+                        <div className="body">
+                            <div className="letter"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         );
@@ -62,12 +114,13 @@ function App() {
 
                 <h1 className="title">So... 💭</h1>
                 <p className="subtitle">
-                    I'm not great at science, but I'm pretty sure chemistry is
-                    when two people become one, and I'd like to test that theory
-                    with you.
+                    I don’t know if you already have plans for Valentine’s Day,
+                    but I’d really love to take you out—if you’d let me.
                 </p>
 
-                <div className="question">Will you go on a date with me?</div>
+                <div className="question">
+                    So... will you go on a date with me?
+                </div>
 
                 <div className="button-container">
                     <button
@@ -84,7 +137,7 @@ function App() {
                             transform: `translate(${noPosition.x}px, ${noPosition.y}px)`,
                         }}
                     >
-                        {messages[noClickCount]}
+                        {showPlease ? "Please?" : messages[noClickCount]}
                     </button>
                 </div>
             </div>
