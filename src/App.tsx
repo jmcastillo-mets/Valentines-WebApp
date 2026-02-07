@@ -1,13 +1,36 @@
 import "./App.css";
 import {useState} from "react";
 
+// Backend logging URL — set `VITE_LOG_URL` in production (Vercel)
+const LOG_URL = (import.meta.env && import.meta.env.VITE_LOG_URL) || 'http://localhost:3001';
+
+// Logging function to send interaction to backend
+const logInteraction = async (action: 'yes' | 'no') => {
+    try {
+        const response = await fetch(`${LOG_URL}/api/log`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ action }),
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            console.log('Logged to server:', data);
+        } else {
+            console.error('Failed to log interaction:', response.statusText);
+        }
+    } catch (error) {
+        console.error('Error logging interaction:', error);
+    }
+};
+
 function App() {
-    const [noPosition, setNoPosition] = useState({x: 0, y: 0});
     const [yesClicked, setYesClicked] = useState(false);
     const [envelopeOpened, setEnvelopeOpened] = useState(false);
     const [showInvitation, setShowInvitation] = useState(false);
     const [noClickCount, setNoClickCount] = useState(0);
-    const [hasInteracted, setHasInteracted] = useState(false);
     const [showSadMessage, setShowSadMessage] = useState(false);
     const [showDateModal, setShowDateModal] = useState(false);
     const [selectedDate, setSelectedDate] = useState("");
@@ -48,26 +71,16 @@ function App() {
     ];
 
     const handleNoClick = () => {
-        const vw = window.innerWidth || 0;
-        const isSmall = vw <= 420; // match CSS breakpoint
-
-        if (!isSmall) {
-            if (!hasInteracted) setHasInteracted(true);
-            // randomize position on click for larger screens
-            const maxX = window.innerWidth - 150;
-            const maxY = window.innerHeight - 60;
-            const randomX = Math.random() * maxX;
-            const randomY = Math.random() * maxY;
-            setNoPosition({x: randomX, y: randomY});
-        }
-
+        logInteraction('no');
+        
         // Show sad message permanently and advance to next message in list
         setShowSadMessage(true);
-        const next = (noClickCount + 1) % messages.length;
+        const next = noClickCount + 1;
         setNoClickCount(next);
     };
 
     const handleYes = () => {
+        logInteraction('yes');
         setYesClicked(true);
     };
 
@@ -107,19 +120,19 @@ function App() {
                     </p>
                     <p className="heart-sequence">❤️ 💕 💖 💝 💗 ❤️</p>
                     <p className="date-message">
-                        I can't wait to spend an{" "}
+                        {/* I can't wait to spend an{" "}
                         <span className="highlight">amazing day</span> with you!
-                        <br />
+                        <br /> */}
                         Let's pick a date and make it{" "}
                         <span className="highlight">unforgettable</span>! 🌹
                     </p>
-                    <div className="note-section">
+                    {/* <div className="note-section">
                         <p className="note-label">✨ A little reminder:</p>
                         <p className="note-text">
                             Weekends are best so we can take our time. Let's
                             make sure your parents are happy too! 💕
                         </p>
-                    </div>
+                    </div> */}
                     <button
                         className="date-picker-btn"
                         onClick={() => setShowDateModal(true)}
@@ -186,9 +199,9 @@ function App() {
                             </div>
                         </div>
                     )}
-                    <p className="love-message">
+                    {/* <p className="love-message">
                         This is just the beginning of something beautiful... 💕
-                    </p>
+                    </p> */}
                 </div>
             </div>
         );
@@ -251,14 +264,14 @@ function App() {
                     <div className="sad-message">
                         <div className="sad-gif">
                             <iframe
-                                src={`https://tenor.com/embed/${tenorIds[noClickCount % tenorIds.length]}`}
+                                src={`https://tenor.com/embed/${tenorIds[Math.min(noClickCount, messages.length - 1) % tenorIds.length]}`}
                                 title="sad-gif"
                                 frameBorder="0"
                                 scrolling="no"
                                 allowTransparency={true}
                             />
                         </div>
-                        <p className="sad-text">{messages[noClickCount]}</p>
+                        <p className="sad-text">{messages[Math.min(noClickCount, messages.length - 1)]}</p>
                     </div>
                 )}
                 <p className="subtitle">
@@ -278,16 +291,13 @@ function App() {
                         Yes! 😍
                     </button>
                     <button
-                        className={`btn btn-no ${hasInteracted ? "floating" : ""}`}
+                        className="btn btn-no"
                         onClick={handleNoClick}
-                        style={
-                            hasInteracted
-                                ? {
-                                      left: `${noPosition.x}px`,
-                                      top: `${noPosition.y}px`,
-                                  }
-                                : {}
-                        }
+                        disabled={noClickCount >= messages.length}
+                        style={{
+                            opacity: Math.max(0, 1 - (noClickCount / messages.length)),
+                            visibility: noClickCount >= messages.length ? 'hidden' : 'visible',
+                        }}
                     >
                         No 🥺
                     </button>
